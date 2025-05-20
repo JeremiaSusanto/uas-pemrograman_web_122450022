@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import { useLocation, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import Tanaman from "./pages/Tanaman";
+import Jadwal from "./pages/Jadwal";
+import NotFound from "./pages/NotFound";
 
-function App() {
+const App = () => {
+  const location = useLocation();
+  const isLoginPage = location.pathname === "/login";
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {!isLoginPage && <Navbar />}
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/tanaman" element={<Tanaman />} />
+        <Route path="/jadwal" element={<Jadwal />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </div>
   );
-}
+};
 
 export default App;
