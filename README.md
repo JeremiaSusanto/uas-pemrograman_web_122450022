@@ -29,7 +29,6 @@ Program Studi: Sains Data, Institut Teknologi Sumatera (ITERA)
 - React JS (Frontend)
 - Python Pyramid (Backend)
 - PostgreSQL (Database)
-- RESTful API
 
 ---
 
