@@ -1,0 +1,4 @@
+pyramid
+pyramid-cors
+psycopg2-binary
+bcrypt
