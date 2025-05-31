@@ -8,9 +8,17 @@
     <!-- ✅ Tambahkan Tailwind CDN di sini -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <title>PlantCare</title>
+    <title>🌱 PlantCare</title>
+    <!-- Favicon utama: gunakan logo192.png agar kompatibel dengan create-react-app -->
+    <link rel="icon" type="image/png" sizes="192x192" href="/logo192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/logo512.png" />
+    <link rel="icon" type="image/png" href="/favicon.ico" />
   </head>
   <body>
+    <div class="flex items-center justify-center mt-8 select-none">
+      <img src="/src/images/plantcare.png" alt="PlantCare Logo" class="w-10 h-10 mr-3" onerror="this.onerror=null;this.src='/plantcare.png'" />
+      <span class="text-3xl font-bold text-green-800">PlantCare</span>
+    </div>
     <div id="root"></div>
   </body>
 </html>
