@@ -19,11 +19,11 @@ const JadwalForm = ({ onSubmit, initialData, isEdit = false, plantOptions = [] }
     { value: "penyemprotan", label: "Penyemprotan", icon: "💨", color: "indigo" },
     { value: "lainnya", label: "Lainnya", icon: "📝", color: "gray" }
   ];
-
   useEffect(() => {
     if (initialData) {
-      setNamaTanaman(initialData.nama_tanaman || "");
-      setJenisPerawatan(initialData.jenis_perawatan || "");
+      // Handle both field name formats for compatibility
+      setNamaTanaman(initialData.nama_tanaman || initialData.namaTanaman || "");
+      setJenisPerawatan(initialData.jenis_perawatan || initialData.kegiatan || "");
       setTanggal(initialData.tanggal || "");
       setCatatan(initialData.catatan || "");
     }
@@ -62,15 +62,18 @@ const JadwalForm = ({ onSubmit, initialData, isEdit = false, plantOptions = [] }
     if (!validateForm()) return;
 
     setIsSubmitting(true);
-    
-    try {
+      try {
       const scheduleData = {
-        id: initialData?.id || Date.now(),
-        nama_tanaman: namaTanaman.trim(),
-        jenis_perawatan: jenisPerawatan,
+        namaTanaman: namaTanaman.trim(), // Backend expects namaTanaman
+        kegiatan: jenisPerawatan,        // Backend expects kegiatan  
         tanggal: tanggal,
         catatan: catatan.trim(),
       };
+
+      // Only include ID for edit operations
+      if (isEdit && initialData?.id) {
+        scheduleData.id = initialData.id;
+      }
 
       await onSubmit(scheduleData);
 

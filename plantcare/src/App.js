@@ -4,6 +4,9 @@ import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useAuth } from "./context/AuthContext";
 
+// Debug import for testing
+import testLogin from "./debug/testLogin";
+
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Tanaman from "./pages/Tanaman";

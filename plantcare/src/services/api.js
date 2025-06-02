@@ -17,6 +17,8 @@ function isValidCache(cacheEntry) {
 
 export async function apiRequest(path, options = {}) {
   try {
+    console.log(`Making API request to: ${BASE_URL + path}`, options);
+    
     // Check cache for GET requests
     if (!options.method || options.method === 'GET') {
       const cacheKey = getCacheKey(path, options);
@@ -28,14 +30,23 @@ export async function apiRequest(path, options = {}) {
       }
     }
 
+    // Add timeout to prevent hanging requests
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
     const res = await fetch(BASE_URL + path, {
+      signal: controller.signal,
       credentials: 'include',
+      mode: 'cors', // Explicitly set CORS mode
       headers: {
         'Content-Type': 'application/json',
         ...options.headers,
       },
       ...options,
     });
+    
+    clearTimeout(timeoutId);
+    console.log(`API response status for ${path}:`, res.status);
     
     const data = await res.json();
     

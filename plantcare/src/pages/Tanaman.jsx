@@ -132,12 +132,12 @@ const Tanaman = () => {
   }, [tanamanList, debouncedSearchTerm, filterJenis, sortBy, filterAndSortTanaman]);
 
   const getUniqueJenis = () => uniqueJenis;
-
   const handleAddOrEdit = async (data) => {
     setError("");
     try {
       if (editingTanaman) {
-        await updateTanaman(data.id, data);
+        // For edit: use the existing ID from editingTanaman
+        await updateTanaman(editingTanaman.id, data);
         setEditingTanaman(null);
       } else {
         await createTanaman(data);

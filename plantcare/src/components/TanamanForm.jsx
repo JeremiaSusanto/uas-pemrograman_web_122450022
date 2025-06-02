@@ -54,14 +54,17 @@ const TanamanForm = ({ onSubmit, initialData = null, isEdit = false }) => {
     if (!validateForm()) return;
 
     setIsSubmitting(true);
-    
-    try {
+      try {
       const data = {
-        id: initialData?.id || Date.now(),
         nama: nama.trim(),
         jenis: jenis.trim(),
         lokasi: lokasi.trim(),
       };
+
+      // Only include ID for edit operations
+      if (isEdit && initialData?.id) {
+        data.id = initialData.id;
+      }
 
       await onSubmit(data);
 

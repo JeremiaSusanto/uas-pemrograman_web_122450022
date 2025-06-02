@@ -162,11 +162,11 @@ const Jadwal = () => {
       setError(err.message || "Gagal menambah jadwal");
     }
   };
-
   const handleEdit = async (updatedJadwal) => {
     setError("");
     try {
-      await updateJadwal(updatedJadwal.id, updatedJadwal);
+      // For edit: use the existing ID from editData
+      await updateJadwal(editData.id, updatedJadwal);
       fetchJadwal();
       setEditData(null);
       setShowForm(false);
